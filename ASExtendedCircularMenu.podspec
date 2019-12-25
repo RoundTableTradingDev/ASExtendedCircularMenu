@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-ASExtendedCircularMenu is a librery for circular menu control with Dynamic Draggble option. It is developed in swift 3.0 .
+ASExtendedCircularMenu is a librery for circular menu control with Dynamic Draggble option. It is developed in swift 5.0 .
                        DESC
 
   s.homepage         = 'https://github.com/anshul18895/ASExtendedCircularMenu'
@@ -28,7 +28,7 @@ ASExtendedCircularMenu is a librery for circular menu control with Dynamic Dragg
   s.source           = { :git => 'https://github.com/anshul18895/ASExtendedCircularMenu.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'ASExtendedCircularMenu/Classes/**/*'
   

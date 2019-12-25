@@ -1,16 +1,16 @@
 PODS:
-  - ASExtendedCircularMenu (0.1.0)
+  - ASExtendedCircularMenu (0.1.1)
 
 DEPENDENCIES:
   - ASExtendedCircularMenu (from `../`)
 
 EXTERNAL SOURCES:
   ASExtendedCircularMenu:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  ASExtendedCircularMenu: 69d09f73198092b3a71bef54b802db91ad998508
+  ASExtendedCircularMenu: 23dbb7b07206f1ea981348433ed05b10c9c933ca
 
 PODFILE CHECKSUM: 7a1d99ac2214a7e51e7507ef8d3621584944fcc4
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.8.4

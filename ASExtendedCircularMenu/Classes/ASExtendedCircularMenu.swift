@@ -115,11 +115,11 @@ public class ASCircularMenuButton: UIButton{
                 //Adding targets for dragging schenarios.
                 self.addTarget(self,
                                action: #selector(drag(control:event:)),
-                               for: UIControlEvents.touchDragInside)
+                               for: UIControl.Event.touchDragInside)
                 self.addTarget(self,
                                action: #selector(drag(control:event:)),
-                               for: [UIControlEvents.touchDragExit,
-                                     UIControlEvents.touchDragOutside])
+                               for: [UIControl.Event.touchDragExit,
+                                     UIControl.Event.touchDragOutside])
                 
             }
         }
