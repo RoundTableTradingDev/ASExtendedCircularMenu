@@ -154,6 +154,13 @@ public class ASCircularMenuButton: UIButton{
         self.tintColor = .clear
     }
     
+    public override init(frame: CGRect) {
+        self.isDreggable = false
+        super.init(frame: frame)
+        self.isSelected = false
+        self.tintColor = .clear
+    }
+    
     //This method is use for set target for MenuButton.
     public func setTargetForButton(){
         self.addTarget(self, action: #selector(onClickMenuButton), for: .touchUpInside)
