@@ -40,23 +40,23 @@ public protocol ASCircularButtonDelegate {
 
 public extension ASCircularButtonDelegate where Self:UIViewController{
     
-    public func configureCircularMenuButton(button: ASCircularMenuButton, numberOfMenuItems: Int , menuRedius: CGFloat ,postion ofButton: CircularButtonPosition){
+    func configureCircularMenuButton(button: ASCircularMenuButton, in view: UIView, numberOfMenuItems: Int , menuRedius: CGFloat ,postion ofButton: CircularButtonPosition){
         button.configureCircularButton(numberOfMenuItems: numberOfMenuItems, menuRedius: menuRedius, postion: ofButton)
-        button.parentViewOfMenuButton = self.view
+        button.parentViewOfMenuButton = view
         button.delegate = self
     }
     
-    public func configureDraggebleCircularMenuButton(button: ASCircularMenuButton, numberOfMenuItems: Int , menuRedius: CGFloat ,postion ofButton: CircularButtonPosition){
+    func configureDraggebleCircularMenuButton(button: ASCircularMenuButton, in view: UIView, numberOfMenuItems: Int , menuRedius: CGFloat ,postion ofButton: CircularButtonPosition){
         button.configureCircularButton(numberOfMenuItems: numberOfMenuItems, menuRedius: menuRedius, postion: ofButton)
-        button.parentViewOfMenuButton = self.view
+        button.parentViewOfMenuButton = view
         button.delegate = self
         button.isDreggable = true
     }
     
-    public func configureDynamicCircularMenuButton(button: ASCircularMenuButton, numberOfMenuItems: Int){
+    func configureDynamicCircularMenuButton(button: ASCircularMenuButton, in view: UIView, numberOfMenuItems: Int){
         button.numberOfMenuItems = numberOfMenuItems
         button.setupDynamically()
-        button.parentViewOfMenuButton = self.view
+        button.parentViewOfMenuButton = view
         button.delegate = self
     }
     
@@ -89,6 +89,8 @@ public class ASCircularMenuButton: UIButton{
     
     //This var is used for Adding/removeing 360 degree rotation for main menuButton. By defualt it will be true.
     public var sholudMenuButtonAnimate: Bool = true
+    
+    fileprivate let backgroundView = UIView()
     
     //Varibles to set the size for Dynamic button
     private var _menuButtonSize:CGSize = CGSize.init(width: 30 , height: 30)
@@ -150,15 +152,22 @@ public class ASCircularMenuButton: UIButton{
     required public init?(coder aDecoder: NSCoder) {
         self.isDreggable = false
         super.init(coder: aDecoder)
-        self.isSelected = false
-        self.tintColor = .clear
+        defaultConfig()
     }
     
     public override init(frame: CGRect) {
         self.isDreggable = false
         super.init(frame: frame)
+        defaultConfig()
+    }
+    
+    private func defaultConfig() {
         self.isSelected = false
         self.tintColor = .clear
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        backgroundView.alpha = 0
+        backgroundView.isUserInteractionEnabled = true
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMenuButton)))
     }
     
     //This method is use for set target for MenuButton.
@@ -215,10 +224,15 @@ public class ASCircularMenuButton: UIButton{
             self.circularButtonPositon = self.setDynamicButtonPosition()
             self.customRadiusForButton()
         }
+        
         if !isSelected{
             //will get all origins
             let origines = setupCGPoints()
-            
+            parentViewOfMenuButton.insertSubview(backgroundView, belowSubview: self)
+            backgroundView.frame = parentViewOfMenuButton.bounds
+            UIView.animate(withDuration: 0.3) {
+                self.backgroundView.alpha = 1
+            }
             //creating all buttons at menu button icon
             for i in 0...numberOfMenuItems-1{
                 
@@ -253,6 +267,12 @@ public class ASCircularMenuButton: UIButton{
             }
             // If menu is already open
         }else{
+            UIView.animate(withDuration: 0.3, animations: {
+                self.backgroundView.alpha = 0
+            }) { (_) in
+                self.backgroundView.removeFromSuperview()
+            }
+            
             for button in arrayButton{
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     button.alpha = 0.0

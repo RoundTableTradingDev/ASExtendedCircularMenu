@@ -16,10 +16,10 @@ class ViewController: UIViewController,ASCircularButtonDelegate {
     let colourArray: [UIColor] = [.red , .blue , .green , .yellow , .purple , .gray ,.black , .brown]
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureDynamicCircularMenuButton(button: shareButton, numberOfMenuItems: 5)
+        configureDynamicCircularMenuButton(button: shareButton, in: self.view, numberOfMenuItems: 5)
         shareButton.menuButtonSize = .medium
         
-        configureDraggebleCircularMenuButton(button: colourPickerButton, numberOfMenuItems: 8, menuRedius: 70, postion: .center)
+        configureDraggebleCircularMenuButton(button: colourPickerButton, in: self.view, numberOfMenuItems: 8, menuRedius: 70, postion: .center)
         colourPickerButton.menuButtonSize = .medium
         colourPickerButton.sholudMenuButtonAnimate = false
         // Do any additional setup after loading the view, typically from a nib.
